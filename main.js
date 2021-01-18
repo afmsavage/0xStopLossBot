@@ -25,10 +25,10 @@ const main = async (buy, sell, ammt) => {
     `https://api.0x.org/swap/v1/quote?${qs.stringify(params)}`
   );
 
-  console.log(await response.data);
+  //console.log(await response.data);
 };
 
-main('WETH', 'DAI', '1000000000000000')
+//main('WETH', 'DAI', '1000000000000000')
 
 
 
@@ -41,15 +41,22 @@ const getPrice = async (buyToken, sellToken, ammt) => {
   /swap/v1/quote?buyToken=DAI&sellToken=WETH&sellAmount=100000000000000000
   */
   let quote = await axios.get(url)
-  console.log(`Price: ${quote.data.price}
-Buy token to ETH rate: ${quote.data.buyTokenToEthRate}`);
+  return quote.data.price
+  //   console.log(`Price: ${quote.data.price}
+  // Buy token to ETH rate: ${quote.data.buyTokenToEthRate}`);
 }
 
 getPrice('DAI', 'ETH', '100000000000');
 
 
 // TODO: Create a watch function - maybe an express server to have it be constant?
-
+const watchPrice = (price, buy, sell, ammt) => {
+  // TODO: Figure out how to fire this every 10 seconds?
+  let watch = getPrice(buy, sell, ammt);
+  // if (watch < price) {
+  //   main();
+  // }
+}
 
 
 // TODO: Create the CLI portion to make this easier.  Or just a `node buy xxx xxx ammt` script

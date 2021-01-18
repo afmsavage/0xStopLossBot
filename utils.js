@@ -9,5 +9,4 @@ const gasPrice = async () => {
   let price = await axios.get(gasPriceOracle)
   return price.data.data.fast
 }
-
 module.exports = { gasPrice };
